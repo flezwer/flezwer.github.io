@@ -1,0 +1,9 @@
+# GitHub Pages builds this repo with Jekyll. Nothing here needs processing;
+# these entries only keep internal notes off the public site.
+# (Files and folders that start with a dot, like .impeccable/ and .claude/, are skipped by default.)
+exclude:
+  - README.md
+  - PRODUCT.md
+  - DESIGN.md
+  - "assets/img/*.json"
+  - "assets/img/*/*.json"

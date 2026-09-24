@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abyss Launcher: a free Minecraft launcher for Windows</title>
+  <meta name="description" content="Free Minecraft: Java Edition launcher for Windows. Every version, Fabric, Modrinth mods, automatic Java and playtime stats, all one Ctrl+K away.">
+  <meta name="theme-color" content="#0b0b12">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://flezwer.github.io/">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Abyss Launcher">
+  <meta property="og:title" content="Abyss Launcher: a free Minecraft launcher for Windows">
+  <meta property="og:description" content="Every version, Fabric, Modrinth mods, automatic Java and playtime stats, all one Ctrl+K away.">
+  <meta property="og:url" content="https://flezwer.github.io/">
+  <meta property="og:image" content="https://flezwer.github.io/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="assets/fonts/pixelify-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/qrafty.otf" as="font" type="font/otf" crossorigin>
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/boot.js"></script>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="17.5" cy="10.5" r=".6" fill="currentColor" stroke="none"/><circle cx="8.5" cy="7.5" r=".6" fill="currentColor" stroke="none"/><circle cx="6.5" cy="12.5" r=".6" fill="currentColor" stroke="none"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.75 1.65-1.69 0-.44-.18-.84-.44-1.13-.29-.29-.44-.65-.44-1.13a1.64 1.64 0 0 1 1.67-1.67h2c3.05 0 5.55-2.5 5.55-5.55C21.97 6.01 17.46 2 12 2z"/></symbol>
+    <symbol id="i-command" viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 0 0 0-6z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="m21 21-4.35-4.35"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-enter" viewBox="0 0 24 24"><path d="m9 10-5 5 5 5"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+
+    <symbol id="f-mx" viewBox="0 0 30 30"><rect width="10" height="30" fill="#006847"/><rect x="10" width="10" height="30" fill="#fff"/><rect x="20" width="10" height="30" fill="#ce1126"/><ellipse cx="15" cy="14.6" rx="2.6" ry="2.3" fill="#8c5a2b"/><path d="M11.9 16.4c1.7 1.9 4.5 1.9 6.2 0" fill="none" stroke="#1f7a3f" stroke-width="1.1" stroke-linecap="round"/></symbol>
+    <symbol id="f-es" viewBox="0 0 30 30"><rect width="30" height="30" fill="#aa151b"/><rect y="7.5" width="30" height="15" fill="#f1bf00"/></symbol>
+    <symbol id="f-us" viewBox="0 0 30 30"><rect width="30" height="30" fill="#b22234"/><path d="M0 3.46h30M0 8.08h30M0 12.69h30M0 17.31h30M0 21.92h30M0 26.54h30" stroke="#fff" stroke-width="2.31"/><rect width="14" height="16.15" fill="#3c3b6e"/><g fill="#fff"><circle cx="3" cy="3" r=".85"/><circle cx="7" cy="3" r=".85"/><circle cx="11" cy="3" r=".85"/><circle cx="5" cy="6.4" r=".85"/><circle cx="9" cy="6.4" r=".85"/><circle cx="3" cy="9.8" r=".85"/><circle cx="7" cy="9.8" r=".85"/><circle cx="11" cy="9.8" r=".85"/><circle cx="5" cy="13.2" r=".85"/><circle cx="9" cy="13.2" r=".85"/></g></symbol>
+    <symbol id="f-it" viewBox="0 0 30 30"><rect width="10" height="30" fill="#009246"/><rect x="10" width="10" height="30" fill="#fff"/><rect x="20" width="10" height="30" fill="#ce2b37"/></symbol>
+    <symbol id="f-fr" viewBox="0 0 30 30"><rect width="10" height="30" fill="#0055a4"/><rect x="10" width="10" height="30" fill="#fff"/><rect x="20" width="10" height="30" fill="#ef4135"/></symbol>
+    <symbol id="f-de" viewBox="0 0 30 30"><rect width="30" height="10" fill="#000"/><rect y="10" width="30" height="10" fill="#dd0000"/><rect y="20" width="30" height="10" fill="#ffce00"/></symbol>
+    <symbol id="f-ru" viewBox="0 0 30 30"><rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#0039a6"/><rect y="20" width="30" height="10" fill="#d52b1e"/></symbol>
+  </svg>
+
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+  <canvas class="snow" aria-hidden="true"></canvas>
+
+  <header class="bar">
+    <a class="brand" href="#top" aria-label="Abyss Launcher">
+      <img class="brand__icon" src="assets/img/icon-128.png" width="28" height="28" alt="">
+      <span class="brand__word" aria-hidden="true">ABYSS</span>
+    </a>
+    <div class="bar__actions">
+      <button class="pill" type="button" data-open-palette>
+        <svg class="i"><use href="#i-search"/></svg>
+        <span class="pill__label" data-i18n="nav.search">Search</span>
+        <kbd class="k"><span data-i18n="kbd.ctrl">Ctrl</span> K</kbd>
+      </button>
+      <a class="icon-btn" href="https://github.com/flezwer/Abyss-Launcher" aria-label="Abyss Launcher on GitHub" data-i18n-aria="nav.github">
+        <svg class="i i--fill"><use href="#i-github"/></svg>
+      </a>
+      <div class="lang">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Language: English">
+          <svg class="flag" viewBox="0 0 30 30"><use href="#f-us"/></svg>
+        </button>
+        <ul class="lang__menu" id="lang-menu" role="menu" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <img data-shot="home" class="hero__bg" src="assets/img/en/home-1600.webp" srcset="assets/img/en/home-960.webp 960w, assets/img/en/home-1600.webp 1600w" sizes="(max-width: 760px) 150vw, 1240px" width="1600" height="1000" alt="" aria-hidden="true" fetchpriority="high">
+      <div class="hero__inner">
+        <h1 class="hero__title" id="hero-title" data-i18n="hero.title"><span class="s">Pick a version.</span> <span class="s">Add mods.</span> <span class="s">Press play.</span></h1>
+        <p class="hero__sub" data-i18n="hero.sub">Abyss is a free Minecraft: Java Edition launcher for Windows. It handles versions, Fabric, Modrinth mods and even Java for you.</p>
+
+        <div class="palette-home" id="palette-home">
+          <div class="palette" id="palette">
+            <div class="palette__search">
+              <svg class="i"><use href="#i-search"/></svg>
+              <input class="palette__input" id="palette-input" type="text" role="combobox" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list" aria-activedescendant="cmd-download" autocomplete="off" spellcheck="false" placeholder="Type a command…" data-i18n-placeholder="palette.placeholder" aria-label="Commands" data-i18n-aria="palette.label">
+              <kbd class="k palette__k"><span data-i18n="kbd.ctrl">Ctrl</span> K</kbd>
+              <button class="palette__close" type="button" data-close-palette aria-label="Close" data-i18n-aria="palette.close"><svg class="i"><use href="#i-x"/></svg></button>
+            </div>
+            <div class="palette__list" id="palette-list" role="listbox" aria-label="Commands" data-i18n-aria="palette.label">
+              <div class="palette__group" role="presentation" data-group="start" data-i18n="palette.group.start">Start</div>
+              <a class="cmd cmd--primary is-active" role="option" id="cmd-download" aria-selected="true" href="https://github.com/flezwer/Abyss-Launcher/releases/latest" data-cmd="download" data-release-link>
+                <svg class="i"><use href="#i-download"/></svg>
+                <span class="cmd__label" data-i18n="cmd.download">Download for Windows</span>
+                <span class="cmd__hint"><span class="q" data-release-version>v1.1.0</span><span class="dot" aria-hidden="true"></span><span data-release-size>74 MB</span></span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <a class="cmd" role="option" id="cmd-github" aria-selected="false" href="https://github.com/flezwer/Abyss-Launcher" data-cmd="github">
+                <svg class="i i--fill"><use href="#i-github"/></svg>
+                <span class="cmd__label" data-i18n="cmd.github">View the source on GitHub</span>
+                <span class="cmd__hint">flezwer/Abyss-Launcher</span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <div class="palette__group" role="presentation" data-group="features" data-i18n="palette.group.features">What it does</div>
+              <a class="cmd" role="option" id="cmd-play" aria-selected="false" href="#play" data-cmd="play">
+                <svg class="i"><use href="#i-layers"/></svg>
+                <span class="cmd__label" data-i18n="cmd.play">Play any version</span>
+                <span class="cmd__hint" data-i18n="cmd.play.hint">Releases, snapshots, betas</span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <a class="cmd" role="option" id="cmd-mods" aria-selected="false" href="#mods" data-cmd="mods">
+                <svg class="i"><use href="#i-box"/></svg>
+                <span class="cmd__label" data-i18n="cmd.mods">Install mods from Modrinth</span>
+                <span class="cmd__hint" data-i18n="cmd.mods.hint">Shaders and resource packs</span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <a class="cmd" role="option" id="cmd-java" aria-selected="false" href="#java" data-cmd="java">
+                <svg class="i"><use href="#i-cup"/></svg>
+                <span class="cmd__label" data-i18n="cmd.java">Let Abyss set up Java</span>
+                <span class="cmd__hint" data-i18n="cmd.java.hint">One click</span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <a class="cmd" role="option" id="cmd-stats" aria-selected="false" href="#stats" data-cmd="stats">
+                <svg class="i"><use href="#i-chart"/></svg>
+                <span class="cmd__label" data-i18n="cmd.stats">See your playtime</span>
+                <span class="cmd__hint" data-i18n="cmd.stats.hint">Last 14 days</span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <a class="cmd" role="option" id="cmd-servers" aria-selected="false" href="#servers" data-cmd="servers">
+                <svg class="i"><use href="#i-server"/></svg>
+                <span class="cmd__label" data-i18n="cmd.servers">Join your servers</span>
+                <span class="cmd__hint" data-i18n="cmd.servers.hint">Live ping</span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <a class="cmd" role="option" id="cmd-theme" aria-selected="false" href="#theme" data-cmd="theme">
+                <svg class="i"><use href="#i-palette"/></svg>
+                <span class="cmd__label" data-i18n="cmd.theme">Make it yours</span>
+                <span class="cmd__hint" data-i18n="cmd.theme.hint">15 accent colors</span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <a class="cmd cmd--extra" role="option" id="cmd-palette" aria-selected="false" href="#palette-section" data-cmd="palette">
+                <svg class="i"><use href="#i-command"/></svg>
+                <span class="cmd__label" data-i18n="cmd.palette">Do it all from Ctrl+K</span>
+                <span class="cmd__hint" data-i18n="cmd.palette.hint">No mouse needed</span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <a class="cmd cmd--extra" role="option" id="cmd-req" aria-selected="false" href="#requirements" data-cmd="req">
+                <svg class="i"><use href="#i-info"/></svg>
+                <span class="cmd__label" data-i18n="cmd.req">Before you download</span>
+                <span class="cmd__hint" data-i18n="cmd.req.hint">Requirements</span>
+                <svg class="i cmd__enter"><use href="#i-enter"/></svg>
+              </a>
+              <p class="palette__empty" hidden></p>
+            </div>
+            <div class="palette__foot" aria-hidden="true">
+              <span><kbd class="k k--icon"><svg class="i"><use href="#i-up"/></svg></kbd><kbd class="k k--icon"><svg class="i"><use href="#i-down"/></svg></kbd> <span data-i18n="palette.foot.move">move</span></span>
+              <span><kbd class="k">Enter</kbd> <span data-i18n="palette.foot.run">run</span></span>
+              <span><kbd class="k">Esc</kbd> <span data-i18n="palette.foot.close">close</span></span>
+            </div>
+          </div>
+        </div>
+
+        <ul class="hero__meta">
+          <li data-i18n="meta.free">Free</li>
+          <li data-i18n="meta.os">Windows 10 and 11</li>
+          <li><a href="https://github.com/flezwer/Abyss-Launcher" data-i18n="meta.source">Source on GitHub</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="feature" id="play" aria-labelledby="play-h" data-section>
+      <div class="row" data-row>
+        <svg class="i row__icon"><use href="#i-layers"/></svg>
+        <h2 class="row__title" id="play-h" tabindex="-1" data-i18n="cmd.play">Play any version</h2>
+        <span class="row__hint" data-i18n="cmd.play.hint">Releases, snapshots, betas</span>
+      </div>
+      <div class="feature__body">
+        <div class="feature__text">
+          <p data-i18n="play.p">Every release Mojang has shipped, plus snapshots and betas when you want them. Keep separate instances for survival, modded and vanilla, each with its own version, RAM and notes.</p>
+          <ul class="facts">
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="play.f1">Vanilla and Fabric instances</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="play.f2">Clone, pin and export instances</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="play.f3">Microsoft login or offline profiles</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="play.f4">Your worlds are backed up before each launch</span></li>
+          </ul>
+        </div>
+        <figure class="shot shot--bleed-r">
+          <img data-shot="home" src="assets/img/en/home-1600.webp" srcset="assets/img/en/home-960.webp 960w, assets/img/en/home-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 62vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Abyss Launcher home screen with three instances, each with a Play button" data-i18n-alt="alt.home">
+          <figcaption data-i18n="shot.caption">Real interface, demo profile</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="feature feature--wide" id="mods" aria-labelledby="mods-h" data-section>
+      <div class="row" data-row>
+        <svg class="i row__icon"><use href="#i-box"/></svg>
+        <h2 class="row__title" id="mods-h" tabindex="-1" data-i18n="cmd.mods">Install mods from Modrinth</h2>
+        <span class="row__hint" data-i18n="cmd.mods.hint">Shaders and resource packs</span>
+      </div>
+      <div class="feature__body">
+        <div class="feature__text feature__text--split">
+          <p data-i18n="mods.p">Search all of Modrinth without leaving the launcher. Abyss warns you when a file doesn’t fit your game version, lists the dependencies a mod needs and tells you when updates are out.</p>
+          <ul class="facts">
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="mods.f1">Shaders and resource packs too</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="mods.f2">Update your mods in one click</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="mods.f3">Turn mods off without deleting them</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="mods.f4">Drag and drop your own .jar files</span></li>
+          </ul>
+        </div>
+        <figure class="shot">
+          <img data-shot="mods" src="assets/img/en/mods-1600.webp" srcset="assets/img/en/mods-960.webp 960w, assets/img/en/mods-1600.webp 1600w" sizes="(max-width: 1240px) 100vw, 1180px" width="1600" height="750" loading="lazy" decoding="async" alt="Grid of the most-downloaded Modrinth mods inside Abyss, each with a download button" data-i18n-alt="alt.mods">
+          <figcaption data-i18n="shot.caption">Real interface, demo profile</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="feature feature--flip" id="java" aria-labelledby="java-h" data-section>
+      <div class="row" data-row>
+        <svg class="i row__icon"><use href="#i-cup"/></svg>
+        <h2 class="row__title" id="java-h" tabindex="-1" data-i18n="cmd.java">Let Abyss set up Java</h2>
+        <span class="row__hint" data-i18n="cmd.java.hint">One click</span>
+      </div>
+      <div class="feature__body">
+        <div class="feature__text">
+          <p data-i18n="java.p">Minecraft 1.20.5 and newer needs Java 21. Versions 1.18 to 1.20.4 need Java 17. Abyss checks the Java you have, installs the right one with one click and picks it when you launch.</p>
+          <ul class="facts">
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="java.f1">Spots the wrong Java before you play</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="java.f2">Installs Temurin (Adoptium) for you</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="java.f3">Chooses a compatible Java at launch</span></li>
+          </ul>
+        </div>
+        <figure class="shot shot--bleed-l">
+          <img data-shot="java" src="assets/img/en/java-1600.webp" srcset="assets/img/en/java-960.webp 960w, assets/img/en/java-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 62vw" width="1600" height="618" loading="lazy" decoding="async" alt="Abyss warning that Java 17 is installed but this version needs Java 21, while it downloads Java 21 automatically" data-i18n-alt="alt.java">
+          <figcaption data-i18n="shot.caption">Real interface, demo profile</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="feature" id="stats" aria-labelledby="stats-h" data-section>
+      <div class="row" data-row>
+        <svg class="i row__icon"><use href="#i-chart"/></svg>
+        <h2 class="row__title" id="stats-h" tabindex="-1" data-i18n="cmd.stats">See your playtime</h2>
+        <span class="row__hint" data-i18n="cmd.stats.hint">Last 14 days</span>
+      </div>
+      <div class="feature__body">
+        <div class="feature__text">
+          <p data-i18n="stats.p">Total hours, sessions, your most-played version and a chart of the last 14 days. Abyss keeps count while you play.</p>
+        </div>
+        <figure class="shot shot--bleed-r">
+          <img data-shot="stats" src="assets/img/en/stats-1600.webp" srcset="assets/img/en/stats-960.webp 960w, assets/img/en/stats-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 62vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Stats screen with total playtime, sessions, most-played version and a 14-day chart" data-i18n-alt="alt.stats">
+          <figcaption data-i18n="shot.caption">Real interface, demo profile</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="feature feature--flip" id="servers" aria-labelledby="servers-h" data-section>
+      <div class="row" data-row>
+        <svg class="i row__icon"><use href="#i-server"/></svg>
+        <h2 class="row__title" id="servers-h" tabindex="-1" data-i18n="cmd.servers">Join your servers</h2>
+        <span class="row__hint" data-i18n="cmd.servers.hint">Live ping</span>
+      </div>
+      <div class="feature__body">
+        <div class="feature__text">
+          <p data-i18n="servers.p">Save the servers you play on, watch their ping refresh every 30 seconds and join from the list. The game opens already connected.</p>
+          <ul class="facts">
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="servers.f1">Favorites and one-click IP copy</span></li>
+            <li><svg class="i"><use href="#i-check"/></svg><span data-i18n="servers.f2">Manage and back up your worlds</span></li>
+          </ul>
+        </div>
+        <figure class="shot shot--bleed-l">
+          <img data-shot="servers" src="assets/img/en/servers-1600.webp" srcset="assets/img/en/servers-960.webp 960w, assets/img/en/servers-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 62vw" width="1600" height="518" loading="lazy" decoding="async" alt="Server list in Abyss showing three servers online with their ping in milliseconds" data-i18n-alt="alt.servers">
+          <figcaption data-i18n="shot.caption">Real interface, demo profile</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="feature feature--theme" id="theme" aria-labelledby="theme-h" data-section>
+      <div class="row" data-row>
+        <svg class="i row__icon"><use href="#i-palette"/></svg>
+        <h2 class="row__title" id="theme-h" tabindex="-1" data-i18n="cmd.theme">Make it yours</h2>
+        <span class="row__hint" data-i18n="cmd.theme.hint">15 accent colors</span>
+      </div>
+      <div class="feature__body">
+        <div class="feature__text">
+          <p data-i18n="theme.p">Dark or light, 15 accent colors and themes you make yourself. Try them here: this page changes color with you.</p>
+          <div class="swatches" role="radiogroup" aria-label="Accent color" data-i18n-aria="theme.label"></div>
+          <p class="swatches__now"><span data-i18n="theme.current">Current accent:</span> <strong data-accent-name>Abyss</strong></p>
+        </div>
+        <figure class="shot shot--bleed-r">
+          <img data-shot="theme" src="assets/img/en/theme-1600.webp" srcset="assets/img/en/theme-960.webp 960w, assets/img/en/theme-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 62vw" width="1600" height="639" loading="lazy" decoding="async" alt="Appearance settings with dark and light themes and 15 accent color swatches" data-i18n-alt="alt.theme">
+          <figcaption data-i18n="shot.caption">Real interface, demo profile</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="feature feature--palette" id="palette-section" aria-labelledby="palette-h" data-section>
+      <div class="row" data-row>
+        <svg class="i row__icon"><use href="#i-command"/></svg>
+        <h2 class="row__title" id="palette-h" tabindex="-1" data-i18n="cmd.palette">Do it all from Ctrl+K</h2>
+        <span class="row__hint" data-i18n="cmd.palette.hint">No mouse needed</span>
+      </div>
+      <div class="feature__body">
+        <div class="feature__text">
+          <p data-i18n="palette.p">Jump to any screen, find an instance, switch versions or change the theme without reaching for the mouse. This page works the same way: press Ctrl+K.</p>
+          <button class="btn" type="button" data-open-palette>
+            <svg class="i"><use href="#i-command"/></svg>
+            <span data-i18n="palette.try">Open the palette</span>
+            <kbd class="k"><span data-i18n="kbd.ctrl">Ctrl</span> K</kbd>
+          </button>
+        </div>
+        <figure class="shot shot--palette">
+          <img data-shot="palette" src="assets/img/en/palette-800.webp" srcset="assets/img/en/palette-600.webp 600w, assets/img/en/palette-800.webp 800w" sizes="(max-width: 960px) 100vw, 520px" width="800" height="659" loading="lazy" decoding="async" alt="Abyss command palette listing shortcuts to every screen" data-i18n-alt="alt.palette">
+          <figcaption data-i18n="shot.caption">Real interface, demo profile</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="feature feature--req" id="requirements" aria-labelledby="req-h" data-section>
+      <div class="row" data-row>
+        <svg class="i row__icon"><use href="#i-info"/></svg>
+        <h2 class="row__title" id="req-h" tabindex="-1" data-i18n="cmd.req">Before you download</h2>
+        <span class="row__hint" data-i18n="cmd.req.hint">Requirements</span>
+      </div>
+      <ul class="req">
+        <li data-i18n="req.1">Windows 10 or 11, 64-bit. There’s no macOS or Linux version yet.</li>
+        <li data-i18n="req.2">The launcher comes in 7 languages. It asks which one you want the first time you open it.</li>
+        <li data-i18n="req.3">Instances run Vanilla or Fabric. Forge isn’t supported yet.</li>
+        <li data-i18n="req.4">The installer isn’t signed yet, so Windows SmartScreen may warn you. Click “More info”, then “Run anyway”.</li>
+        <li data-i18n="req.5">To play online you need a Minecraft: Java Edition account.</li>
+      </ul>
+    </section>
+
+    <section class="close" id="download" aria-labelledby="close-h">
+      <a class="close__row" href="https://github.com/flezwer/Abyss-Launcher/releases/latest" data-cmd="download" data-release-link>
+        <svg class="i close__icon"><use href="#i-download"/></svg>
+        <h2 class="close__title" id="close-h" data-i18n="close.title">Download Abyss Launcher</h2>
+        <svg class="i close__enter"><use href="#i-enter"/></svg>
+      </a>
+      <div class="close__meta">
+        <p class="close__facts">
+          <span class="q" data-release-version>v1.1.0</span>
+          <span data-i18n="close.os">Windows 10 and 11</span>
+          <span data-release-size>74 MB</span>
+          <span data-release-date>Released September 24, 2026</span>
+        </p>
+        <p class="close__links">
+          <a href="https://github.com/flezwer/Abyss-Launcher/releases/latest" data-release-page><span data-i18n="close.notes">Release notes</span><svg class="i"><use href="#i-arrow"/></svg></a>
+          <a href="https://github.com/flezwer/Abyss-Launcher"><span data-i18n="close.source">Source on GitHub</span><svg class="i"><use href="#i-arrow"/></svg></a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <a class="brand brand--foot" href="#top" aria-label="Abyss Launcher">
+      <img class="brand__icon" src="assets/img/icon-128.png" width="24" height="24" alt="">
+      <span class="brand__word" aria-hidden="true">ABYSS</span>
+    </a>
+    <p class="foot__made"><span data-i18n="foot.made">Made by</span> <a href="https://github.com/flezwer">flezwer</a></p>
+    <p class="foot__legal" data-i18n="foot.disclaimer">Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+  </footer>
+
+  <dialog class="overlay" id="palette-overlay" aria-label="Commands" data-i18n-aria="palette.label"></dialog>
+  <div class="toast" role="status" aria-live="polite" hidden>
+    <svg class="i"><use href="#i-download"/></svg>
+    <p class="toast__text"></p>
+  </div>
+
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
